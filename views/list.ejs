@@ -1,0 +1,51 @@
+<%- include("header") -%>
+
+<section class="title">
+  <div class="container-fluid"> 
+      <!-- Nav Bar -->
+      <nav class="navbar fixed-top navbar-expand-lg navbar-light">
+          <a class="navbar-brand" href="/">To do List</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ms-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="/Buy">To buy List</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/Order">To order List</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/Important">Important</a>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+  </div>
+</section>
+
+  <div class="box" id="heading">
+    <h1> <%= listTitle %> </h1>
+  </div>
+
+  <div class="box">
+
+    <% newListItems.forEach(function(item){ %>
+      <form action="/delete" method="post">
+        <div class="item">
+          <input type="checkbox" name="checkbox" value="<%= item._id %>" onchange="this.form.submit()">
+          <p><%=  item.name  %></p>
+        </div>
+        <input type="hidden" name="listName" value="<%= listTitle %>" >
+      </form>
+    <% }) %>
+   
+
+      <form class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+        <button type="submit" class="buttons" name="list" value="<%= listTitle %>">+</button>
+      </form>
+  </div>
+
+<%- include("footer") -%>
